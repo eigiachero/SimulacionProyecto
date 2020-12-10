@@ -28,3 +28,14 @@ std::list<double> genUniformDistribution(double min, double max, int quantity){
 
     return uniformNumbers;
 };
+
+
+std::list<double> genInfiniteList(int quantity) {
+    std::list<double> listOfInfinites;
+
+    for (int i=0; i<quantity; i++){
+        listOfInfinites.push_back(std::numeric_limits<double>::max());
+    }
+
+    return listOfInfinites;
+}

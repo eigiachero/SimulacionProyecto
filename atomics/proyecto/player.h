@@ -1,6 +1,7 @@
 //FLAGS:-std=c++11
 //CPP:proyecto/player.cpp
 //CPP:proyecto/numberGenerator.cpp
+//CPP:proyecto/strategies.cpp
 #if !defined player_h
 #define player_h
 
@@ -8,7 +9,8 @@
 #include "event.h"
 #include "stdarg.h"
 #include "limits"
-#include "numberGenerator.h"
+#include "strategies.h"
+#include <list>
 
 class player: public Simulator { 
 	std::list<double> weights;

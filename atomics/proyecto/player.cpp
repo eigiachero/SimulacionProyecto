@@ -10,8 +10,9 @@ void player::init(double t,...) {
   name = va_arg(parameters, char*);
   
   //Variables
-  weights = genUniformDistribution(5.0, 8.0, quantity);
-  interarrivals = genExponentialDistribution(6.0, quantity);
+  weights = getStrategyWeights(strategy, quantity);
+  interarrivals = getStrategyInterarrivals(strategy, quantity);
+
   sigma = interarrivals.front();
 }
 
@@ -31,7 +32,7 @@ void player::dint(double t) {
 }
 
 void player::dext(Event x, double t) {
-
+  // TODO
 }
 
 Event player::lambda(double t) {
