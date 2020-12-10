@@ -1,0 +1,10 @@
+bin/
+build/
+doc/
+engine/
+library/
+output/
+atomics/
+examples/
+version
+.vscode/

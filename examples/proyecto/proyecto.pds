@@ -1,0 +1,17 @@
+Root-Coordinator
+ {
+  Simulator
+   {
+    Path = proyecto/player.h
+    Parameters = 
+   }
+  EIC
+   {
+   }
+  EOC
+   {
+   }
+  IC
+   {
+   }
+ }

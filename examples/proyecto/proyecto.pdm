@@ -1,0 +1,40 @@
+Coupled
+    {
+    Type = Root
+    Name = proyecto
+    Ports = 0; 0
+    Description = 
+    Graphic
+        {
+        Position = 0; 0
+        Dimension = 600; 600
+        Direction = Right
+        Color = 15
+        Icon = 
+        Window = 5000; 5000; 5000; 5000
+        }
+    Parameters
+        {
+        }
+    System
+        {
+        Atomic
+            {
+            Name = PC
+            Ports = 0 ; 1
+            Path = proyecto/player.h
+            Description = Player PC
+            Graphic
+                {
+                Position = -11655 ; -5055
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 15
+                Icon = None
+                }
+            Parameters
+                {
+                }
+            }
+        }
+    }
