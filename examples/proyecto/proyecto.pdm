@@ -26,14 +26,38 @@ Coupled
             Description = Player PC
             Graphic
                 {
-                Position = -11655 ; -5055
-                Dimension = 675 ; 675
+                Position = -16230 ; -8340
+                Dimension = 810 ; 795
                 Direction = Right
                 Color = 15
                 Icon = None
                 }
             Parameters
                 {
+                name = Str; PC ; Nombre del jugador
+                strategy = Val; 0 ; Estrategia a utilizar\n0 - Estrategia de PC\n1..4 - Estrategias de jugador explicadas en el proyecto
+                quantity = Val; 100 ; Cantidad de elementos (pesos e interrarribos) a generar
+                }
+            }
+        Atomic
+            {
+            Name = Human
+            Ports = 0 ; 1
+            Path = proyecto/player.h
+            Description = Player Human
+            Graphic
+                {
+                Position = -16230 ; -6465
+                Dimension = 810 ; 795
+                Direction = Right
+                Color = 15
+                Icon = None
+                }
+            Parameters
+                {
+                name = Str; Human ; Nombre del jugador
+                strategy = Val; 1 ; Estrategia a utilizar\n0 - Estrategia de PC\n1..4 - Estrategias de jugador explicadas en el proyecto
+                quantity = Val; 100 ; Cantidad de elementos (pesos e interrarribos) a generar
                 }
             }
         }

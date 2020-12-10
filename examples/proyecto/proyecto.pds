@@ -3,7 +3,12 @@ Root-Coordinator
   Simulator
    {
     Path = proyecto/player.h
-    Parameters = 
+    Parameters = "PC",0.000000e+00,1.000000e+02
+   }
+  Simulator
+   {
+    Path = proyecto/player.h
+    Parameters = "Human",1.000000e+00,1.000000e+02
    }
   EIC
    {

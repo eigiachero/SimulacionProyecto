@@ -13,7 +13,9 @@
 class player: public Simulator { 
 	std::list<double> weights;
 	std::list<double> interarrivals;
-	int strategy;	
+	int strategy;
+	int quantity;
+	char* name;
 
 	double sigma;
 
