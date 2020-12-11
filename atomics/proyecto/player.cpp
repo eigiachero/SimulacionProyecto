@@ -36,12 +36,12 @@ void player::dext(Event x, double t) {
 }
 
 Event player::lambda(double t) {
-  double weight = weights.front();
-  printLog("%s %f %f\n",name, weight, interarrivals.front());
+  out = weights.front();
+  // printLog("%s %f %f\n",name, out, interarrivals.front());
 
-  return Event(&weight, 0);
+  return Event(&out, 0);
 }
 
 void player::exit() {
-  printLog("Fin Player %s\n", name);
+  // printLog("Fin Player %s\n", name);
 }

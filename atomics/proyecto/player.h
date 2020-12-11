@@ -19,6 +19,7 @@ class player: public Simulator {
 	int quantity;
 	char* name;
 
+	double out;
 	double sigma;
 
 	public:

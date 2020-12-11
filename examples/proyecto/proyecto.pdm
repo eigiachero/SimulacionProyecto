@@ -26,7 +26,7 @@ Coupled
             Description = Player PC
             Graphic
                 {
-                Position = -27330 ; -10290
+                Position = -22830 ; -8190
                 Dimension = 810 ; 795
                 Direction = Right
                 Color = 15
@@ -47,7 +47,7 @@ Coupled
             Description = Player Human
             Graphic
                 {
-                Position = -27330 ; -7815
+                Position = -22830 ; -5715
                 Dimension = 810 ; 795
                 Direction = Right
                 Color = 15
@@ -56,9 +56,43 @@ Coupled
             Parameters
                 {
                 name = Str; Human ; Nombre del jugador
-                strategy = Val; 3 ; Estrategia a utilizar\n0 - Estrategia de PC\n1..4 - Estrategias de jugador explicadas en el proyecto
+                strategy = Val; 1 ; Estrategia a utilizar\n0 - Estrategia de PC\n1..4 - Estrategias de jugador explicadas en el proyecto
                 quantity = Val; 100 ; Cantidad de elementos (pesos e interrarribos) a generar
                 }
+            }
+        Atomic
+            {
+            Name = Cinta
+            Ports = 2 ; 2
+            Path = proyecto/conveyerbelt.h
+            Description = Cinta dinamica
+            Graphic
+                {
+                Position = -20115 ; -6855
+                Dimension = 1095 ; 675
+                Direction = Right
+                Color = 14
+                Icon = None
+                }
+            Parameters
+                {
+                velocity = Val; 1 ; Velocidad constante
+                length = Val; 25 ; Longitud de la cinta
+                }
+            }
+        Line
+            {
+            Source = Cmp ;  1 ;  1 ; 0
+            Sink = Cmp ;  3 ;  1 ; -1
+            PointX = -21900 ; -20265 ; -20265
+            PointY = -7800 ; -7800 ; -6675
+            }
+        Line
+            {
+            Source = Cmp ;  2 ;  1 ; 0
+            Sink = Cmp ;  3 ;  2 ; -1
+            PointX = -21900 ; -20265 ; -20265
+            PointY = -5325 ; -5325 ; -6375
             }
         }
     }

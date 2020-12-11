@@ -8,7 +8,12 @@ Root-Coordinator
   Simulator
    {
     Path = proyecto/player.h
-    Parameters = "Human",3.000000e+00,1.000000e+02
+    Parameters = "Human",1.000000e+00,1.000000e+02
+   }
+  Simulator
+   {
+    Path = proyecto/conveyerbelt.h
+    Parameters = 1.000000e+00,2.500000e+01
    }
   EIC
    {
@@ -18,5 +23,7 @@ Root-Coordinator
    }
   IC
    {
+    (0,0);(2,0)
+    (1,0);(2,1)
    }
  }
