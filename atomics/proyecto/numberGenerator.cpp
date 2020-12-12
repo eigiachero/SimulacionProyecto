@@ -39,3 +39,10 @@ std::list<double> genInfiniteList(int quantity) {
 
     return listOfInfinites;
 }
+
+int getRandomInt(double min, double max) {
+    generator.seed(rd());
+    std::uniform_real_distribution<double> distUnif(min, max);
+   
+    return (int) distUnif(generator);
+};

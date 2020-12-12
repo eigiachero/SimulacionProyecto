@@ -6,7 +6,6 @@ void conveyerbelt::init(double t,...) {
 
   velocity = va_arg(parameters, double);
   length = va_arg(parameters, double);
-  printLog("parametros %f %f\n", velocity, length);
 
   sigma = std::numeric_limits<double>::max();
 }
@@ -76,31 +75,31 @@ Event conveyerbelt::lambda(double t) {
   std::pair<double,double> PlayerBox (PlayerBoxes.front().first, PlayerDistance);
 
   if (isEqual(PcDistance, length)) {
-    printLog("LlegoPc\n");
+    // printLog("LlegoPc\n");
     out = std::make_tuple(PC_ARRIVAL, PcBox.first, length);
-    return Event(&out, 0);
+    return Event(&out, ARRIVALS_PORT);
   } else if (isEqual(PlayerDistance, length)) {
-    printLog("LlegoPlayer\n");
+    // printLog("LlegoPlayer\n");
     out = std::make_tuple(PLAYER_ARRIVAL, PlayerBox.first, length);
-    return Event(&out, 0);
+    return Event(&out, ARRIVALS_PORT);
   } else {
     double PcCollisionPower = collisionPower(PcBox);
     double PlayerCollisionPower = collisionPower(PlayerBox);
 
     if (isEqual(PlayerCollisionPower, PcCollisionPower)) {
-      printLog("ColisionEmpate\n");
+      // printLog("ColisionEmpate\n");
       out = std::make_tuple(COLLISION_DRAW, 0, PlayerDistance);
-      return Event(&out, 1);
+      return Event(&out, COLLISIONS_PORT);
     }
     if (PlayerCollisionPower < PcCollisionPower) {
-      printLog("ColisionGanoPc\n");
+      // printLog("ColisionGanoPc\n");
       out = std::make_tuple(COLLISION_PC_WINS, updatedWeight(PcBox, PlayerBox), PlayerDistance);
-      return Event(&out, 1);
+      return Event(&out, COLLISIONS_PORT);
     }
     if (PlayerCollisionPower > PcCollisionPower) {
-      printLog("ColisionGanoPlayer\n");
+      // printLog("ColisionGanoPlayer\n");
       out = std::make_tuple(COLLISION_PLAYER_WINS, updatedWeight(PlayerBox, PcBox), PlayerDistance);
-      return Event(&out, 1);
+      return Event(&out, COLLISIONS_PORT);
     }
   }
 
@@ -108,5 +107,5 @@ Event conveyerbelt::lambda(double t) {
 }
 
 void conveyerbelt::exit() {
-  printLog("Fin Cinta\n");
+  // printLog("Fin Cinta\n");
 }

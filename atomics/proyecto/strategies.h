@@ -12,3 +12,7 @@
 std::list<double> getStrategyWeights(int strategy, int quantity);
 
 std::list<double> getStrategyInterarrivals(int strategy, int quantity);
+
+std::list<double> strategyReorderWeightList(std::list<double> weights, double winnerWeight);
+
+std::list<double> strategyRandomWeight(std::list<double> weights);

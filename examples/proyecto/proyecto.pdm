@@ -26,7 +26,7 @@ Coupled
             Description = Player PC
             Graphic
                 {
-                Position = -22830 ; -8190
+                Position = -16005 ; -6165
                 Dimension = 810 ; 795
                 Direction = Right
                 Color = 15
@@ -41,14 +41,14 @@ Coupled
             }
         Atomic
             {
-            Name = Human
-            Ports = 0 ; 1
+            Name = Player
+            Ports = 1 ; 1
             Path = proyecto/player.h
-            Description = Player Human
+            Description = Human player
             Graphic
                 {
-                Position = -22830 ; -5715
-                Dimension = 810 ; 795
+                Position = -16005 ; -3630
+                Dimension = 810 ; 675
                 Direction = Right
                 Color = 15
                 Icon = None
@@ -56,7 +56,7 @@ Coupled
             Parameters
                 {
                 name = Str; Human ; Nombre del jugador
-                strategy = Val; 1 ; Estrategia a utilizar\n0 - Estrategia de PC\n1..4 - Estrategias de jugador explicadas en el proyecto
+                strategy = Val; 4 ; Estrategia a utilizar\n0 - Estrategia de PC\n1..4 - Estrategias de jugador explicadas en el proyecto
                 quantity = Val; 100 ; Cantidad de elementos (pesos e interrarribos) a generar
                 }
             }
@@ -68,10 +68,10 @@ Coupled
             Description = Cinta dinamica
             Graphic
                 {
-                Position = -20115 ; -6855
+                Position = -13290 ; -4830
                 Dimension = 1095 ; 675
                 Direction = Right
-                Color = 14
+                Color = 9
                 Icon = None
                 }
             Parameters
@@ -80,19 +80,143 @@ Coupled
                 length = Val; 25 ; Longitud de la cinta
                 }
             }
+        Atomic
+            {
+            Name = Stadistics
+            Ports = 2 ; 5
+            Path = proyecto/stadistics.h
+            Description = Generador de estadisticas
+            Graphic
+                {
+                Position = -10830 ; -4875
+                Dimension = 675 ; 750
+                Direction = Right
+                Color = 14
+                Icon = None
+                }
+            Parameters
+                {
+                }
+            }
+        Atomic
+            {
+            Name = Llegadas
+            Ports = 2 ; 0
+            Path = sinks/gnuplot.h
+            Description = Grafico de las llegadas
+            Graphic
+                {
+                Position = -8280 ; -5955
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 15
+                Icon = %sinks%gnuplot.svg
+                }
+            Parameters
+                {
+                Inputs = Str; %Inputs ; Number of inputs
+                Format = Str; set xrange [0:%tf] @ set grid @ set title 'Llegadas' ; General Formatting (use @ as line break)
+                Format1 = Str; with lines title 'Pc' ; Formatting options for input 1
+                Format2 = Str; with lines title 'Player' ; Formatting options for input 2
+                Format3 = Str;  ; Formatting options for input 3
+                Format4 = Str;  ; Formatting options for input 4
+                Format5 = Str;  ; Formatting options for input 5
+                }
+            }
+        Atomic
+            {
+            Name = Colisiones
+            Ports = 3 ; 0
+            Path = sinks/gnuplot.h
+            Description = Grafico de las colisiones
+            Graphic
+                {
+                Position = -8280 ; -3480
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 15
+                Icon = %sinks%gnuplot.svg
+                }
+            Parameters
+                {
+                Inputs = Str; %Inputs ; Number of inputs
+                Format = Str; set xrange [0:%tf] @ set grid @ set title 'Colisiones' ; General Formatting (use @ as line break)
+                Format1 = Str; with lines title 'Pc' ; Formatting options for input 1
+                Format2 = Str; with lines title 'Player' ; Formatting options for input 2
+                Format3 = Str; with lines title 'Draw' ; Formatting options for input 3
+                Format4 = Str;  ; Formatting options for input 4
+                Format5 = Str;  ; Formatting options for input 5
+                }
+            }
         Line
             {
             Source = Cmp ;  1 ;  1 ; 0
             Sink = Cmp ;  3 ;  1 ; -1
-            PointX = -21900 ; -20265 ; -20265
-            PointY = -7800 ; -7800 ; -6675
+            PointX = -15075 ; -13440 ; -13440
+            PointY = -5775 ; -5775 ; -4650
             }
         Line
             {
             Source = Cmp ;  2 ;  1 ; 0
             Sink = Cmp ;  3 ;  2 ; -1
-            PointX = -21900 ; -20265 ; -20265
-            PointY = -5325 ; -5325 ; -6375
+            PointX = -15075 ; -13440 ; -13440
+            PointY = -3300 ; -3300 ; -4350
+            }
+        Line
+            {
+            Source = Cmp ;  3 ;  2 ; 0
+            Sink = Cmp ;  4 ;  2 ; -1
+            PointX = -12075 ; -12075 ; -10965
+            PointY = -4350 ; -4350 ; -4350
+            }
+        Line
+            {
+            Source = Cmp ;  3 ;  1 ; 0
+            Sink = Cmp ;  4 ;  1 ; -1
+            PointX = -12075 ; -12075 ; -10965
+            PointY = -4650 ; -4650 ; -4650
+            }
+        Line
+            {
+            Source = Cmp ;  4 ;  1 ; 0
+            Sink = Cmp ;  5 ;  1 ; -1
+            PointX = -10050 ; -10050 ; -8415
+            PointY = -4800 ; -5775 ; -5775
+            }
+        Line
+            {
+            Source = Cmp ;  4 ;  2 ; 0
+            Sink = Cmp ;  5 ;  2 ; -1
+            PointX = -10050 ; -10050 ; -8415
+            PointY = -4650 ; -5475 ; -5475
+            }
+        Line
+            {
+            Source = Cmp ;  4 ;  3 ; 0
+            Sink = Cmp ;  6 ;  1 ; -1
+            PointX = -10050 ; -10050 ; -8415
+            PointY = -4500 ; -3300 ; -3300
+            }
+        Line
+            {
+            Source = Cmp ;  4 ;  4 ; 0
+            Sink = Cmp ;  6 ;  2 ; -1
+            PointX = -10050 ; -10050 ; -8415
+            PointY = -4350 ; -3150 ; -3150
+            }
+        Line
+            {
+            Source = Cmp ;  4 ;  5 ; 0
+            Sink = Cmp ;  6 ;  3 ; -1
+            PointX = -10050 ; -10050 ; -8415
+            PointY = -4200 ; -2925 ; -2925
+            }
+        Line
+            {
+            Source = Cmp ;  3 ;  2 ; 0
+            Sink = Cmp ;  2 ;  1 ; -1
+            PointX = -12075 ; -11700 ; -11700 ; -16650 ; -16650 ; -16140
+            PointY = -4350 ; -4350 ; -2175 ; -2175 ; -3300 ; -3300
             }
         }
     }

@@ -10,7 +10,9 @@
 #include "stdarg.h"
 #include "limits"
 #include "strategies.h"
+#include "constants.h"
 #include <list>
+#include <tuple>
 
 class player: public Simulator { 
 	std::list<double> weights;
@@ -18,6 +20,10 @@ class player: public Simulator {
 	int strategy;
 	int quantity;
 	char* name;
+
+
+	std::tuple<int, double, double> in;
+	int event;
 
 	double out;
 	double sigma;

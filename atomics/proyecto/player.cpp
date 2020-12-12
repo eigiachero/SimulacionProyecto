@@ -13,7 +13,7 @@ void player::init(double t,...) {
   weights = getStrategyWeights(strategy, quantity);
   interarrivals = getStrategyInterarrivals(strategy, quantity);
 
-  sigma = interarrivals.front();
+  sigma = 0;
 }
 
 double player::ta(double t) {
@@ -32,7 +32,28 @@ void player::dint(double t) {
 }
 
 void player::dext(Event x, double t) {
-  // TODO
+  in = *(std::tuple<int, double, double>*) x.value;
+  int event = (int) std::get<0>(in);
+
+  if (!weights.empty()) {
+    if (event == COLLISION_DRAW) {
+      printLog("Draw");
+      if (strategy == 3 || strategy == 4) {
+        weights = strategyRandomWeight(weights);
+        sigma = 0;
+      }
+    }
+    if (event == COLLISION_PC_WINS) {
+      if (strategy == 3) {
+        printLog("Collision %f \n", std::get<1>(in));
+        weights = strategyReorderWeightList(weights, std::get<1>(in));
+        sigma = 0;
+      }
+      if (strategy == 4) {
+        sigma = 0;
+      }
+    }
+  }  
 }
 
 Event player::lambda(double t) {
