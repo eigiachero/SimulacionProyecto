@@ -1,6 +1,9 @@
 #include <list>
 #include <utility>
+#include <cmath>
 #include "limits"
+
+bool isEqual(double A, double B);
 
 double collisionPower(std::pair<double,double> box);
 

@@ -1,5 +1,11 @@
 #include "beltLibrary.h"
 
+bool isEqual(double A, double B) {
+  double epsilon = 0.000000001;
+
+  return fabs(A - B) < epsilon;
+}
+
 double collisionPower(std::pair<double,double> box) {
   return box.first * box.second;
 }
