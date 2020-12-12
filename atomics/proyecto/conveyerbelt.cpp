@@ -4,8 +4,9 @@ void conveyerbelt::init(double t,...) {
   va_list parameters;
   va_start(parameters,t);
 
-  velocity = (int) va_arg(parameters, double);
-  length = (int) va_arg(parameters, double);
+  velocity = va_arg(parameters, double);
+  length = va_arg(parameters, double);
+  printLog("parametros %f %f\n", velocity, length);
 
   sigma = std::numeric_limits<double>::max();
 }
@@ -19,8 +20,10 @@ void conveyerbelt::dint(double t) {
 
 void conveyerbelt::dext(Event x, double t) {
   in = *(double*) x.value;
-  std::pair<double,double> box (in,0.0);
-  // printLog("%d %f\n", x.port, in);
+  std::pair<double,double> box (in, 0.0);
+
+  PcBoxes = updateAllDistances(PcBoxes, t, velocity);
+  PlayerBoxes = updateAllDistances(PlayerBoxes, t, velocity);
   if (x.port == PC) {
     PcBoxes.push_back(box);
   }
@@ -28,18 +31,22 @@ void conveyerbelt::dext(Event x, double t) {
     PlayerBoxes.push_back(box);
   }
 
+  sigma = nextEvent(PcBoxes, PlayerBoxes, length, velocity);
+
   /*
-  printLog("%d\n",x.port);
-  printLog("%f %f %d \n", PcBoxes.front().first, PcBoxes.back().first, PcBoxes.size());
-  printLog("%f %f %d \n", PlayerBoxes.front().first, PlayerBoxes.back().first, PlayerBoxes.size());
+  printLog("Sigma %f\n", sigma);   
+  printLog("Puerto %d Tiempo %f\n",x.port, t);
+  printLog("PC %f %f %d \n", PcBoxes.front().second, PcBoxes.back().second, PcBoxes.size());
+  printLog("Player %f %f %d \n", PlayerBoxes.front().second, PlayerBoxes.back().second, PlayerBoxes.size());
   printLog("\n");
-  */
+  */  
 }
 
 Event conveyerbelt::lambda(double t) {
+  printLog("Llegue a 0\n");
   return Event();
 }
 
 void conveyerbelt::exit() {
-  printLog("Fin Cinta");
+  printLog("Fin Cinta\n");
 }

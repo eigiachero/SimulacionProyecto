@@ -1,4 +1,5 @@
 //CPP:proyecto/conveyerbelt.cpp
+//CPP:proyecto/beltLibrary.cpp
 #if !defined conveyerbelt_h
 #define conveyerbelt_h
 #define PC 0
@@ -8,6 +9,7 @@
 #include "event.h"
 #include "stdarg.h"
 #include "limits"
+#include "beltLibrary.h"
 #include <list>
 #include <utility>
 
