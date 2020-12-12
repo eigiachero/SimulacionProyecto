@@ -2,14 +2,14 @@
 //CPP:proyecto/beltLibrary.cpp
 #if !defined conveyerbelt_h
 #define conveyerbelt_h
-#define PC 0
-#define Player 1
 
 #include "simulator.h"
 #include "event.h"
 #include "stdarg.h"
 #include "limits"
 #include "beltLibrary.h"
+#include "constants.h"
+#include <tuple>
 #include <list>
 #include <utility>
 
@@ -21,6 +21,10 @@ class conveyerbelt: public Simulator {
 
 	double sigma;
 	double in;
+
+	double PcDistance;
+	double PlayerDistance;
+	std::tuple<int, double, double> out; //(evento, peso_ganador, distancia_ganador)
 
 	public:
 		conveyerbelt(const char *n): Simulator(n) {};

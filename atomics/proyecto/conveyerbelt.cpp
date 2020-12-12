@@ -59,17 +59,51 @@ void conveyerbelt::dext(Event x, double t) {
 
   sigma = nextEvent(PcBoxes, PlayerBoxes, length, velocity);
 
-  const char* who = x.port == 0 ? "PC" : "Player";
-  printLog("Entro %s Pasaron %f s\n", who, e);
-  printLog("Sigma %f\n", sigma);
-  printLog("PC %f %f %d \n", PcBoxes.front().second, PcBoxes.back().second, PcBoxes.size());
-  printLog("Player %f %f %d \n", PlayerBoxes.front().second, PlayerBoxes.back().second, PlayerBoxes.size());
-  printLog("\n");
-    
+  /*
+    const char* who = x.port == 0 ? "PC" : "Player";
+    printLog("Entro %s Pasaron %f s\n", who, e);
+    printLog("Sigma %f\n", sigma);
+    printLog("PC %f %f %d \n", PcBoxes.front().second, PcBoxes.back().second, PcBoxes.size());
+    printLog("Player %f %f %d \n", PlayerBoxes.front().second, PlayerBoxes.back().second, PlayerBoxes.size());
+    printLog("\n");
+  */    
 }
 
 Event conveyerbelt::lambda(double t) {
-  printLog("Llegue a 0\n");
+  PcDistance = updatedDistance(PcBoxes.front().second, sigma, velocity);
+  PlayerDistance = updatedDistance(PlayerBoxes.front().second, sigma, velocity);
+  std::pair<double,double> PcBox (PcBoxes.front().first, PcDistance);
+  std::pair<double,double> PlayerBox (PlayerBoxes.front().first, PlayerDistance);
+
+  if (isEqual(PcDistance, length)) {
+    printLog("LlegoPc\n");
+    out = std::make_tuple(PC_ARRIVAL, PcBox.first, length);
+    return Event(&out, 0);
+  } else if (isEqual(PlayerDistance, length)) {
+    printLog("LlegoPlayer\n");
+    out = std::make_tuple(PLAYER_ARRIVAL, PlayerBox.first, length);
+    return Event(&out, 0);
+  } else {
+    double PcCollisionPower = collisionPower(PcBox);
+    double PlayerCollisionPower = collisionPower(PlayerBox);
+
+    if (isEqual(PlayerCollisionPower, PcCollisionPower)) {
+      printLog("ColisionEmpate\n");
+      out = std::make_tuple(COLLISION_DRAW, 0, PlayerDistance);
+      return Event(&out, 1);
+    }
+    if (PlayerCollisionPower < PcCollisionPower) {
+      printLog("ColisionGanoPc\n");
+      out = std::make_tuple(COLLISION_PC_WINS, updatedWeight(PcBox, PlayerBox), PlayerDistance);
+      return Event(&out, 1);
+    }
+    if (PlayerCollisionPower > PcCollisionPower) {
+      printLog("ColisionGanoPlayer\n");
+      out = std::make_tuple(COLLISION_PLAYER_WINS, updatedWeight(PlayerBox, PcBox), PlayerDistance);
+      return Event(&out, 1);
+    }
+  }
+
   return Event();
 }
 

@@ -1,0 +1,9 @@
+#define PC 0
+#define Player 1
+
+#define PC_ARRIVAL 10
+#define PLAYER_ARRIVAL 11
+
+#define COLLISION_PC_WINS 20
+#define COLLISION_PLAYER_WINS 21
+#define COLLISION_DRAW 22
