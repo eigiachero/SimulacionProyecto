@@ -9,7 +9,7 @@ void stadistics::init(double t,...) {
 	PcCollisionWins = 0;
 	PlayerCollisionWins = 0;
 	CollisionDraws = 0;
-  sigma = std::numeric_limits<double>::max();
+  sigma = numeric_limits<double>::max();
 }
 
 double stadistics::ta(double t) {
@@ -17,13 +17,13 @@ double stadistics::ta(double t) {
 }
 
 void stadistics::dint(double t) {
-  sigma = std::numeric_limits<double>::max();
+  sigma = numeric_limits<double>::max();
 }
 
 void stadistics::dext(Event x, double t) {
-  in = *(std::tuple<int, double, double>*) x.value;
-  event = std::get<0>(in);
-  // printLog("evento:%d peso:%f\n",  std::get<0>(in), std::get<1>(in));
+  in = *(tuple<int, double, double>*) x.value;
+  event = get<0>(in);
+  // printLog("evento:%d peso:%f\n",  get<0>(in), get<1>(in));
   
   switch (event) {
     case PC_ARRIVAL:

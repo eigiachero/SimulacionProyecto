@@ -6,7 +6,7 @@ bool isEqual(double A, double B) {
   return fabs(A - B) < epsilon;
 }
 
-double collisionPower(std::pair<double,double> box) {
+double collisionPower(pair<double,double> box) {
   return box.first * box.second;
 }
 
@@ -14,13 +14,13 @@ double updatedDistance(double oldDistance, double time, double velocity) {
   return oldDistance + time * velocity;
 }
 
-std::list<std::pair<double,double>> updateAllDistances(std::list<std::pair<double,double>> boxes, double time, double velocity) {
-  std::list<std::pair<double,double>> updatedBoxes;
+list<pair<double,double>> updateAllDistances(list<pair<double,double>> boxes, double time, double velocity) {
+  list<pair<double,double>> updatedBoxes;
   int listSize = boxes.size();
 
   for (int i = 0; i < listSize; i++) {
-    std::pair<double,double> box = boxes.back();
-    std::pair<double,double> updatedBox (box.first, updatedDistance(box.second, time, velocity));
+    pair<double,double> box = boxes.back();
+    pair<double,double> updatedBox (box.first, updatedDistance(box.second, time, velocity));
     updatedBoxes.push_front(updatedBox);
     boxes.pop_back();
   }
@@ -28,11 +28,11 @@ std::list<std::pair<double,double>> updateAllDistances(std::list<std::pair<doubl
   return updatedBoxes;
 }
 
-double updatedWeight(std::pair<double,double> winnerBox, std::pair<double,double> loserBox) {
+double updatedWeight(pair<double,double> winnerBox, pair<double,double> loserBox) {
   return winnerBox.first * (collisionPower(loserBox) / collisionPower(winnerBox));
 }
 
-double nextEvent(std::list<std::pair<double,double>> PcBoxes, std::list<std::pair<double,double>> PlayerBoxes, double length, double velocity){
+double nextEvent(list<pair<double,double>> PcBoxes, list<pair<double,double>> PlayerBoxes, double length, double velocity){
   if (!PcBoxes.empty() && !PlayerBoxes.empty()) {
     return (((length - PcBoxes.front().second - PlayerBoxes.front().second) / 2) / velocity);
   }
@@ -42,5 +42,5 @@ double nextEvent(std::list<std::pair<double,double>> PcBoxes, std::list<std::pai
   if (!PlayerBoxes.empty()) {
     return (length - PlayerBoxes.front().second) / velocity;
   }
-  return std::numeric_limits<double>::max();
+  return numeric_limits<double>::max();
 }

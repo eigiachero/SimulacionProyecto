@@ -14,15 +14,16 @@
 #include <list>
 #include <tuple>
 
+using namespace std;
+
 class player: public Simulator { 
-	std::list<double> weights;
-	std::list<double> interarrivals;
+	list<double> weights;
+	list<double> interarrivals;
 	int strategy;
 	int quantity;
 	char* name;
 
-
-	std::tuple<int, double, double> in;
+	tuple<int, double, double> in;
 	int event;
 
 	double out;

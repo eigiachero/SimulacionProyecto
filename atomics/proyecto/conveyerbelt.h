@@ -13,18 +13,20 @@
 #include <list>
 #include <utility>
 
+using namespace std;
+
 class conveyerbelt: public Simulator {
 	double length;
 	double velocity;
-	std::list<std::pair<double,double>> PcBoxes;
-	std::list<std::pair<double,double>> PlayerBoxes;
+	list<pair<double,double>> PcBoxes;
+	list<pair<double,double>> PlayerBoxes;
 
 	double sigma;
 	double in;
 
 	double PcDistance;
 	double PlayerDistance;
-	std::tuple<int, double, double> out; //(evento, peso_ganador, distancia_ganador)
+	tuple<int, double, double> out; //(evento, peso_ganador, distancia_ganador)
 
 	public:
 		conveyerbelt(const char *n): Simulator(n) {};

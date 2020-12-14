@@ -9,8 +9,10 @@
 #include "limits"
 #include <tuple>
 
+using namespace std;
+
 class stadistics: public Simulator {
-	std::tuple<int, double, double> in;
+	tuple<int, double, double> in;
 	double out;
 	int event;
 

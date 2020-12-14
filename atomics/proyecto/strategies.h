@@ -1,5 +1,6 @@
 #include "numberGenerator.h"
-#include "simulator.h" // TODO: Borrar
+
+using namespace std;
 
 // Constantes
 #define strategyPCWeightMin 5
@@ -10,10 +11,10 @@
 #define strategyHumanInterrarrival 10
 
 //Funciones
-std::list<double> getStrategyWeights(int strategy, int quantity);
+list<double> getStrategyWeights(int strategy, int quantity);
 
-std::list<double> getStrategyInterarrivals(int strategy, int quantity);
+list<double> getStrategyInterarrivals(int strategy, int quantity);
 
-std::list<double> strategyReorderWeightList(std::list<double> weights, double winnerWeight);
+list<double> strategyReorderWeightList(list<double> weights, double winnerWeight);
 
-std::list<double> strategyRandomWeight(std::list<double> weights);
+list<double> strategyRandomWeightFirst(list<double> weights);

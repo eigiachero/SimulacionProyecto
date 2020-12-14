@@ -1,13 +1,13 @@
 #include "numberGenerator.h"
 
-std::mt19937 generator;
-std::random_device rd;
+mt19937 generator;
+random_device rd;
 
-std::list<double> genExponentialDistribution(double mean, int quantity){
+list<double> genExponentialDistribution(double mean, int quantity){
     generator.seed(rd());
-    std::list<double> exponentialNumbers;
+    list<double> exponentialNumbers;
 
-    std::exponential_distribution<double> distExp(1.0/mean);
+    exponential_distribution<double> distExp(1.0/mean);
     for (int i=0; i<quantity; i++){
         double num = distExp(generator);
         exponentialNumbers.push_back(num);
@@ -16,11 +16,11 @@ std::list<double> genExponentialDistribution(double mean, int quantity){
     return exponentialNumbers;
 };
 
-std::list<double> genUniformDistribution(double min, double max, int quantity){
+list<double> genUniformDistribution(double min, double max, int quantity){
     generator.seed(rd());
-    std::list<double> uniformNumbers;
+    list<double> uniformNumbers;
 
-    std::uniform_real_distribution<double> distUnif(min, max);
+    uniform_real_distribution<double> distUnif(min, max);
     for (int i=0; i<quantity; i++){
         double num = distUnif(generator);
         uniformNumbers.push_back(num);
@@ -30,11 +30,11 @@ std::list<double> genUniformDistribution(double min, double max, int quantity){
 };
 
 
-std::list<double> genInfiniteList(int quantity) {
-    std::list<double> listOfInfinites;
+list<double> genInfiniteList(int quantity) {
+    list<double> listOfInfinites;
 
     for (int i=0; i<quantity; i++){
-        listOfInfinites.push_back(std::numeric_limits<double>::max());
+        listOfInfinites.push_back(numeric_limits<double>::max());
     }
 
     return listOfInfinites;
@@ -42,7 +42,7 @@ std::list<double> genInfiniteList(int quantity) {
 
 int getRandomInt(double min, double max) {
     generator.seed(rd());
-    std::uniform_real_distribution<double> distUnif(min, max);
+    uniform_real_distribution<double> distUnif(min, max);
    
     return (int) distUnif(generator);
 };

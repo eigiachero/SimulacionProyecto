@@ -27,13 +27,13 @@ void player::dint(double t) {
   if (!weights.empty()) {     
     sigma = interarrivals.front();
   } else {
-    sigma = std::numeric_limits<double>::max();
+    sigma = numeric_limits<double>::max();
   }
 }
 
 void player::dext(Event x, double t) {
-  in = *(std::tuple<int, double, double>*) x.value;
-  int event = (int) std::get<0>(in);
+  in = *(tuple<int, double, double>*) x.value;
+  int event = (int) get<0>(in);
 
   if (!weights.empty()) {
     if (event == PLAYER_ARRIVAL) {
@@ -43,13 +43,13 @@ void player::dext(Event x, double t) {
     }
     if (event == COLLISION_DRAW) {
       if (strategy == 3 || strategy == 4) {
-        weights = strategyRandomWeight(weights);
+        weights = strategyRandomWeightFirst(weights);
         sigma = 0;
       }
     }
     if (event == COLLISION_PC_WINS) {
       if (strategy == 3) {
-        weights = strategyReorderWeightList(weights, std::get<1>(in));
+        weights = strategyReorderWeightList(weights, get<1>(in));
         sigma = 0;
       }
       if (strategy == 4) {

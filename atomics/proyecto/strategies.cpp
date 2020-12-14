@@ -1,9 +1,9 @@
 #include "strategies.h"
 
-std::list<double> getStrategyWeights(int strategy, int quantity){
-  std::list<double> weights;
-  std::list<double> weightsPC = genUniformDistribution(strategyPCWeightMin, strategyPCWeightMax, quantity);
-  std::list<double> weightsHuman = genExponentialDistribution(strategyHumanWeight, quantity);
+list<double> getStrategyWeights(int strategy, int quantity){
+  list<double> weights;
+  list<double> weightsPC = genUniformDistribution(strategyPCWeightMin, strategyPCWeightMax, quantity);
+  list<double> weightsHuman = genExponentialDistribution(strategyHumanWeight, quantity);
   
   switch (strategy) {
     case 0:
@@ -15,23 +15,25 @@ std::list<double> getStrategyWeights(int strategy, int quantity){
       break;
     case 2:
       weights = weightsHuman;
-      weights.sort(std::greater<double>());
+      weights.sort(greater<double>());
       break;
     case 3:
       weights = weightsHuman;
       weights.sort();
+      weights = strategyRandomWeightFirst(weights);
       break;
     case 4:
       weights = weightsHuman;
-      weights.sort(std::greater<double>());
+      weights.sort(greater<double>());
+      weights = strategyRandomWeightFirst(weights);
       break;
   }
   
   return weights;
 }
 
-std::list<double> getStrategyInterarrivals(int strategy, int quantity){
-  std::list<double> interarrivals;
+list<double> getStrategyInterarrivals(int strategy, int quantity){
+  list<double> interarrivals;
 
   switch (strategy) {
     case 0:
@@ -54,8 +56,8 @@ std::list<double> getStrategyInterarrivals(int strategy, int quantity){
   return interarrivals;
 }
 
-std::list<double> strategyReorderWeightList(std::list<double> weights, double winnerWeight) {
-  std::list<double> reorderedWeights;
+list<double> strategyReorderWeightList(list<double> weights, double winnerWeight) {
+  list<double> reorderedWeights;
   bool found = false;
   int size = (int) weights.size();
 
@@ -74,8 +76,8 @@ std::list<double> strategyReorderWeightList(std::list<double> weights, double wi
   return reorderedWeights;
 }
 
-std::list<double> strategyRandomWeight(std::list<double> weights) {
-  std::list<double> reorderedWeights;
+list<double> strategyRandomWeightFirst(list<double> weights) {
+  list<double> reorderedWeights;
   int randomPosition = getRandomInt(0, weights.size() - 1);
   int size = (int) weights.size();
 
