@@ -57,12 +57,13 @@ std::list<double> getStrategyInterarrivals(int strategy, int quantity){
 std::list<double> strategyReorderWeightList(std::list<double> weights, double winnerWeight) {
   std::list<double> reorderedWeights;
   bool found = false;
+  int size = (int) weights.size();
 
-  for (int i = 0; i < weights.size(); i++) {
+  for (int i = 0; i < size; i++) {
     double top = weights.front();
     weights.pop_front();
 
-    if (top > winnerWeight && found == false) {
+    if ((top > winnerWeight) && found == false) {
       found = true;
       reorderedWeights.push_front(top);
     } else {
@@ -76,8 +77,9 @@ std::list<double> strategyReorderWeightList(std::list<double> weights, double wi
 std::list<double> strategyRandomWeight(std::list<double> weights) {
   std::list<double> reorderedWeights;
   int randomPosition = getRandomInt(0, weights.size() - 1);
+  int size = (int) weights.size();
 
-  for (int i = 0; i < weights.size(); i++) {
+  for (int i = 0; i < size; i++) {
     double top = weights.front();
     weights.pop_front();
 

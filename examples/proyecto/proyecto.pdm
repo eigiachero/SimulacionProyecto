@@ -41,8 +41,8 @@ Coupled
             }
         Atomic
             {
-            Name = Player
-            Ports = 1 ; 1
+            Name = Jugador
+            Ports = 2 ; 1
             Path = proyecto/player.h
             Description = Human player
             Graphic
@@ -56,7 +56,7 @@ Coupled
             Parameters
                 {
                 name = Str; Human ; Nombre del jugador
-                strategy = Val; 4 ; Estrategia a utilizar\n0 - Estrategia de PC\n1..4 - Estrategias de jugador explicadas en el proyecto
+                strategy = Val; 1 ; Estrategia a utilizar\n0 - Estrategia de PC\n1..4 - Estrategias de jugador explicadas en el proyecto
                 quantity = Val; 100 ; Cantidad de elementos (pesos e interrarribos) a generar
                 }
             }
@@ -82,13 +82,13 @@ Coupled
             }
         Atomic
             {
-            Name = Stadistics
+            Name = Estadisticas
             Ports = 2 ; 5
             Path = proyecto/stadistics.h
             Description = Generador de estadisticas
             Graphic
                 {
-                Position = -10830 ; -4875
+                Position = -10455 ; -4875
                 Dimension = 675 ; 750
                 Direction = Right
                 Color = 14
@@ -106,7 +106,7 @@ Coupled
             Description = Grafico de las llegadas
             Graphic
                 {
-                Position = -8280 ; -5955
+                Position = -7830 ; -5955
                 Dimension = 675 ; 675
                 Direction = Right
                 Color = 15
@@ -131,7 +131,7 @@ Coupled
             Description = Grafico de las colisiones
             Graphic
                 {
-                Position = -8280 ; -3480
+                Position = -7830 ; -3480
                 Dimension = 675 ; 675
                 Direction = Right
                 Color = 15
@@ -166,57 +166,69 @@ Coupled
             {
             Source = Cmp ;  3 ;  2 ; 0
             Sink = Cmp ;  4 ;  2 ; -1
-            PointX = -12075 ; -12075 ; -10965
+            PointX = -12075 ; -12075 ; -10590
             PointY = -4350 ; -4350 ; -4350
             }
         Line
             {
             Source = Cmp ;  3 ;  1 ; 0
             Sink = Cmp ;  4 ;  1 ; -1
-            PointX = -12075 ; -12075 ; -10965
+            PointX = -12075 ; -12075 ; -10590
             PointY = -4650 ; -4650 ; -4650
             }
         Line
             {
             Source = Cmp ;  4 ;  1 ; 0
             Sink = Cmp ;  5 ;  1 ; -1
-            PointX = -10050 ; -10050 ; -8415
+            PointX = -9675 ; -9675 ; -7965
             PointY = -4800 ; -5775 ; -5775
             }
         Line
             {
             Source = Cmp ;  4 ;  2 ; 0
             Sink = Cmp ;  5 ;  2 ; -1
-            PointX = -10050 ; -10050 ; -8415
-            PointY = -4650 ; -5475 ; -5475
+            PointX = -9675 ; -9450 ; -9450 ; -7965
+            PointY = -4650 ; -4650 ; -5475 ; -5475
             }
         Line
             {
             Source = Cmp ;  4 ;  3 ; 0
             Sink = Cmp ;  6 ;  1 ; -1
-            PointX = -10050 ; -10050 ; -8415
-            PointY = -4500 ; -3300 ; -3300
+            PointX = -9675 ; -9225 ; -9225 ; -7965
+            PointY = -4500 ; -4500 ; -3300 ; -3300
             }
         Line
             {
             Source = Cmp ;  4 ;  4 ; 0
             Sink = Cmp ;  6 ;  2 ; -1
-            PointX = -10050 ; -10050 ; -8415
-            PointY = -4350 ; -3150 ; -3150
+            PointX = -9675 ; -9375 ; -9375 ; -7965
+            PointY = -4350 ; -4350 ; -3150 ; -3150
             }
         Line
             {
             Source = Cmp ;  4 ;  5 ; 0
             Sink = Cmp ;  6 ;  3 ; -1
-            PointX = -10050 ; -10050 ; -8415
-            PointY = -4200 ; -2925 ; -2925
+            PointX = -9675 ; -9525 ; -9525 ; -7965
+            PointY = -4200 ; -4200 ; -2925 ; -2925
+            }
+        Line
+            {
+            Source = Cmp ;  3 ;  1 ; 0
+            Sink = Cmp ;  2 ;  1 ; -1
+            PointX = -12075 ; -11925 ; -11925 ; -16350 ; -16350 ; -16140
+            PointY = -4650 ; -4650 ; -2100 ; -2100 ; -3450 ; -3450
             }
         Line
             {
             Source = Cmp ;  3 ;  2 ; 0
-            Sink = Cmp ;  2 ;  1 ; -1
-            PointX = -12075 ; -11700 ; -11700 ; -16650 ; -16650 ; -16140
-            PointY = -4350 ; -4350 ; -2175 ; -2175 ; -3300 ; -3300
+            Sink = Cmp ;  2 ;  2 ; -1
+            PointX = -12075 ; -12075 ; -16140 ; -16140
+            PointY = -4350 ; -2250 ; -2250 ; -3150
+            }
+        Extra
+            {
+                Annotation("Llegadas",-11820,-5040)
+                Annotation("Colisiones\n",-11835,-4365)
             }
         }
     }

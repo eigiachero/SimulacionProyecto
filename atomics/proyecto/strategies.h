@@ -1,4 +1,5 @@
 #include "numberGenerator.h"
+#include "simulator.h" // TODO: Borrar
 
 // Constantes
 #define strategyPCWeightMin 5

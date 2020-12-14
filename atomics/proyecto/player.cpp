@@ -36,8 +36,12 @@ void player::dext(Event x, double t) {
   int event = (int) std::get<0>(in);
 
   if (!weights.empty()) {
+    if (event == PLAYER_ARRIVAL) {
+      if (strategy == 3 || strategy == 4) {
+        sigma = 0;
+      }
+    }
     if (event == COLLISION_DRAW) {
-      printLog("Draw");
       if (strategy == 3 || strategy == 4) {
         weights = strategyRandomWeight(weights);
         sigma = 0;
@@ -45,20 +49,18 @@ void player::dext(Event x, double t) {
     }
     if (event == COLLISION_PC_WINS) {
       if (strategy == 3) {
-        printLog("Collision %f \n", std::get<1>(in));
         weights = strategyReorderWeightList(weights, std::get<1>(in));
         sigma = 0;
       }
       if (strategy == 4) {
         sigma = 0;
       }
-    }
-  }  
+    } 
+  }
 }
 
 Event player::lambda(double t) {
   out = weights.front();
-  // printLog("%s %f %f\n",name, out, interarrivals.front());
 
   return Event(&out, 0);
 }

@@ -20,9 +20,9 @@ void conveyerbelt::dint(double t) {
   std::pair<double,double> PcBox = PcBoxes.front();
   std::pair<double,double> PlayerBox = PlayerBoxes.front();
 
-  if (isEqual(PcBoxes.front().second, length)) {
+  if (PlayerBoxes.empty()) {
     PcBoxes.pop_front();
-  } else if (isEqual(PlayerBoxes.front().second, length)) {
+  } else if (PcBoxes.empty()) {
     PlayerBoxes.pop_front();
   } else {
     double PcCollisionPower = collisionPower(PcBox);
@@ -30,13 +30,15 @@ void conveyerbelt::dint(double t) {
 
     PcBoxes.pop_front();
     PlayerBoxes.pop_front();
-    if (PlayerCollisionPower < PcCollisionPower) {
-      std::pair<double,double> box (updatedWeight(PcBox, PlayerBox), PcBox.second);
-      PcBoxes.push_front(box);
-    }
-    if (PlayerCollisionPower > PcCollisionPower) {
-      std::pair<double,double> box (updatedWeight(PlayerBox, PcBox), PlayerBox.second);
-      PlayerBoxes.push_front(box);
+    if (!isEqual(PlayerCollisionPower, PcCollisionPower)) {
+      if (PlayerCollisionPower < PcCollisionPower) {
+        std::pair<double,double> box (updatedWeight(PcBox, PlayerBox), PcBox.second);
+        PcBoxes.push_front(box);
+      }
+      if (PlayerCollisionPower > PcCollisionPower) {
+        std::pair<double,double> box (updatedWeight(PlayerBox, PcBox), PlayerBox.second);
+        PlayerBoxes.push_front(box);
+      }
     }
   }
   
@@ -74,11 +76,11 @@ Event conveyerbelt::lambda(double t) {
   std::pair<double,double> PcBox (PcBoxes.front().first, PcDistance);
   std::pair<double,double> PlayerBox (PlayerBoxes.front().first, PlayerDistance);
 
-  if (isEqual(PcDistance, length)) {
+  if (PlayerBoxes.empty()) {
     // printLog("LlegoPc\n");
     out = std::make_tuple(PC_ARRIVAL, PcBox.first, length);
     return Event(&out, ARRIVALS_PORT);
-  } else if (isEqual(PlayerDistance, length)) {
+  } else if (PcBoxes.empty()) {
     // printLog("LlegoPlayer\n");
     out = std::make_tuple(PLAYER_ARRIVAL, PlayerBox.first, length);
     return Event(&out, ARRIVALS_PORT);
@@ -90,13 +92,11 @@ Event conveyerbelt::lambda(double t) {
       // printLog("ColisionEmpate\n");
       out = std::make_tuple(COLLISION_DRAW, 0, PlayerDistance);
       return Event(&out, COLLISIONS_PORT);
-    }
-    if (PlayerCollisionPower < PcCollisionPower) {
+    } else if (PlayerCollisionPower < PcCollisionPower) {
       // printLog("ColisionGanoPc\n");
-      out = std::make_tuple(COLLISION_PC_WINS, updatedWeight(PcBox, PlayerBox), PlayerDistance);
+      out = std::make_tuple(COLLISION_PC_WINS, updatedWeight(PcBox, PlayerBox), PcDistance);
       return Event(&out, COLLISIONS_PORT);
-    }
-    if (PlayerCollisionPower > PcCollisionPower) {
+    } else if (PlayerCollisionPower > PcCollisionPower) {
       // printLog("ColisionGanoPlayer\n");
       out = std::make_tuple(COLLISION_PLAYER_WINS, updatedWeight(PlayerBox, PcBox), PlayerDistance);
       return Event(&out, COLLISIONS_PORT);
