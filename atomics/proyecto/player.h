@@ -1,7 +1,7 @@
 //FLAGS:-std=c++11
 //CPP:proyecto/player.cpp
-//CPP:proyecto/numberGenerator.cpp
-//CPP:proyecto/strategies.cpp
+//CPP:proyecto/Utilities/numberGenerator.cpp
+//CPP:proyecto/Utilities/strategies.cpp
 #if !defined player_h
 #define player_h
 
@@ -9,8 +9,8 @@
 #include "event.h"
 #include "stdarg.h"
 #include "limits"
-#include "strategies.h"
-#include "constants.h"
+#include "Utilities/strategies.h"
+#include "Utilities/constants.h"
 #include <list>
 #include <tuple>
 

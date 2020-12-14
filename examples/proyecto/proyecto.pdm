@@ -47,8 +47,8 @@ Coupled
             Description = Human player
             Graphic
                 {
-                Position = -16005 ; -3630
-                Dimension = 810 ; 675
+                Position = -15975 ; -3645
+                Dimension = 765 ; 705
                 Direction = Right
                 Color = 15
                 Icon = None
@@ -56,7 +56,7 @@ Coupled
             Parameters
                 {
                 name = Str; Human ; Nombre del jugador
-                strategy = Val; 1 ; Estrategia a utilizar\n0 - Estrategia de PC\n1..4 - Estrategias de jugador explicadas en el proyecto
+                strategy = Val; 3 ; Estrategia a utilizar\n0 - Estrategia de PC\n1..4 - Estrategias de jugador explicadas en el proyecto
                 quantity = Val; 100 ; Cantidad de elementos (pesos e interrarribos) a generar
                 }
             }

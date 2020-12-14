@@ -1,5 +1,5 @@
 //CPP:proyecto/conveyerbelt.cpp
-//CPP:proyecto/beltLibrary.cpp
+//CPP:proyecto/Utilities/beltLibrary.cpp
 #if !defined conveyerbelt_h
 #define conveyerbelt_h
 
@@ -7,8 +7,8 @@
 #include "event.h"
 #include "stdarg.h"
 #include "limits"
-#include "beltLibrary.h"
-#include "constants.h"
+#include "Utilities/beltLibrary.h"
+#include "Utilities/constants.h"
 #include <tuple>
 #include <list>
 #include <utility>

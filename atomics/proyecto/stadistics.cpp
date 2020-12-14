@@ -79,13 +79,13 @@ Event stadistics::lambda(double t) {
 
 void stadistics::exit() {
   int total = PcCollisionWins + PlayerCollisionWins + PcArrivals  + PlayerArrivals + (CollisionDraws * 2); 
-  printLog("\n-------------- Simulation results ----------\n");
+  printLog("\n-------------- Simulation results --------------\n");
   printLog("Collisions winned by Pc: %d \n", PcCollisionWins);
   printLog("Collisions winned by Player: %d \n", PlayerCollisionWins);
   printLog("Colisiones ended with draw: %d \n", CollisionDraws);
   printLog("Pc Arrivals: %d \n", PcArrivals);
   printLog("Player Arrivals: %d \n", PlayerArrivals);
   printLog("Total: %d \n", total);
-  printLog("-------------------------------------------------\n\n");
+  printLog("-------------------------------------------------\n");
 }
 
