@@ -16,15 +16,17 @@
 
 using namespace std;
 
-class player: public Simulator { 
+class player: public Simulator {
+	// State
 	list<double> weights;
 	list<double> interarrivals;
+	// Parameters
 	int strategy;
 	int quantity;
 	char* name;
 
-	tuple<int, double, double> in;
-	int event;
+	// Input parameters
+	tuple<int, double, double> in; //(evento, peso_ganador, distancia_ganador)
 
 	double out;
 	double sigma;

@@ -1,5 +1,5 @@
-#define PC 0
-#define Player 1
+#define PC 0      // PC Port
+#define Player 1  // Player Port
 
 #define PC_ARRIVAL 10
 #define PLAYER_ARRIVAL 11

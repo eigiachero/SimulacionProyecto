@@ -32,15 +32,17 @@ double updatedWeight(pair<double,double> winnerBox, pair<double,double> loserBox
   return winnerBox.first * (collisionPower(loserBox) / collisionPower(winnerBox));
 }
 
+// Return the time left for the next event to occur.
 double nextEvent(list<pair<double,double>> PcBoxes, list<pair<double,double>> PlayerBoxes, double length, double velocity){
-  if (!PcBoxes.empty() && !PlayerBoxes.empty()) {
+  if (!PcBoxes.empty() && !PlayerBoxes.empty()) {   // Next event is a collision
     return (((length - PcBoxes.front().second - PlayerBoxes.front().second) / 2) / velocity);
   }
-  if (!PcBoxes.empty()) {
+  if (!PcBoxes.empty()) {       // Next event is a PC arrival
     return (length - PcBoxes.front().second) / velocity;
   }
-  if (!PlayerBoxes.empty()) {
+  if (!PlayerBoxes.empty()) {   // Next event is a Player arrival
     return (length - PlayerBoxes.front().second) / velocity;
   }
-  return numeric_limits<double>::max();
+
+  return numeric_limits<double>::max();   // There are no elements in the belt
 }

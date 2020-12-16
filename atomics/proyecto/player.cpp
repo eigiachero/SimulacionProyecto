@@ -4,12 +4,12 @@ void player::init(double t,...) {
   va_list parameters;
   va_start(parameters,t);
 
-  //Parameters
+  // Parameters
   strategy = (int) va_arg(parameters, double);
   quantity = (int) va_arg(parameters, double);
   name = va_arg(parameters, char*);
-  
-  //Variables
+
+  // Variables
   weights = getStrategyWeights(strategy, quantity);
   interarrivals = getStrategyInterarrivals(strategy, quantity);
 
@@ -24,7 +24,7 @@ void player::dint(double t) {
   weights.pop_front();
   interarrivals.pop_front();
 
-  if (!weights.empty()) {     
+  if (!weights.empty()) {
     sigma = interarrivals.front();
   } else {
     sigma = numeric_limits<double>::max();
@@ -34,6 +34,7 @@ void player::dint(double t) {
 void player::dext(Event x, double t) {
   in = *(tuple<int, double, double>*) x.value;
   int event = (int) get<0>(in);
+  double winnerWeight = get<1>(in);
 
   if (!weights.empty()) {
     if (event == PLAYER_ARRIVAL) {
@@ -49,17 +50,18 @@ void player::dext(Event x, double t) {
     }
     if (event == COLLISION_PC_WINS) {
       if (strategy == 3) {
-        weights = strategyReorderWeightList(weights, get<1>(in));
+        weights = strategyReorderWeightList(weights, winnerWeight);
         sigma = 0;
       }
       if (strategy == 4) {
         sigma = 0;
       }
-    } 
+    }
   }
 }
 
 Event player::lambda(double t) {
+  // Returns the weight of the box that will go to the belt.
   out = weights.front();
 
   return Event(&out, 0);

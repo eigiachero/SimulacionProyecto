@@ -12,10 +12,11 @@
 using namespace std;
 
 class stadistics: public Simulator {
-	tuple<int, double, double> in;
+	tuple<int, double, double> in; //(evento, peso_ganador, distancia_ganador)
 	double out;
 	int event;
 
+	// State variables or info accumulators
 	int PcArrivals;
 	int PlayerArrivals;
 	int PcCollisionWins;

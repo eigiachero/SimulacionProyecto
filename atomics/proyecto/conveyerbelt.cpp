@@ -4,6 +4,7 @@ void conveyerbelt::init(double t,...) {
   va_list parameters;
   va_start(parameters,t);
 
+  // Parameters
   velocity = va_arg(parameters, double);
   length = va_arg(parameters, double);
 
@@ -15,39 +16,40 @@ double conveyerbelt::ta(double t) {
 }
 
 void conveyerbelt::dint(double t) {
+  // Obtain the first box of each side, once all distances are updated
   PcBoxes = updateAllDistances(PcBoxes, e, velocity);
   PlayerBoxes = updateAllDistances(PlayerBoxes, e, velocity);
   pair<double,double> PcBox = PcBoxes.front();
   pair<double,double> PlayerBox = PlayerBoxes.front();
 
-  if (PlayerBoxes.empty()) {
+  if (PlayerBoxes.empty()) {      // Pc arrival
     PcBoxes.pop_front();
-  } else if (PcBoxes.empty()) {
+  } else if (PcBoxes.empty()) {   // Player arrival
     PlayerBoxes.pop_front();
-  } else {
+  } else {                        // Collisions
     double PcCollisionPower = collisionPower(PcBox);
     double PlayerCollisionPower = collisionPower(PlayerBox);
 
     PcBoxes.pop_front();
     PlayerBoxes.pop_front();
     if (!isEqual(PlayerCollisionPower, PcCollisionPower)) {
-      if (PlayerCollisionPower < PcCollisionPower) {
+      if (PlayerCollisionPower < PcCollisionPower) {  // Collision PC Win
         pair<double,double> box (updatedWeight(PcBox, PlayerBox), PcBox.second);
         PcBoxes.push_front(box);
       }
-      if (PlayerCollisionPower > PcCollisionPower) {
+      if (PlayerCollisionPower > PcCollisionPower) {  // Collision Player Win
         pair<double,double> box (updatedWeight(PlayerBox, PcBox), PlayerBox.second);
         PlayerBoxes.push_front(box);
       }
     }
   }
-  
+
   sigma = nextEvent(PcBoxes, PlayerBoxes, length, velocity);
 }
 
 void conveyerbelt::dext(Event x, double t) {
   in = *(double*) x.value;
-  pair<double,double> box (in, 0.0);
+  pair<double,double> box (in, 0.0);  // Box to add at the begin of the belt.
 
   PcBoxes = updateAllDistances(PcBoxes, e, velocity);
   PlayerBoxes = updateAllDistances(PlayerBoxes, e, velocity);
@@ -59,47 +61,39 @@ void conveyerbelt::dext(Event x, double t) {
   }
 
   sigma = nextEvent(PcBoxes, PlayerBoxes, length, velocity);
-
-  /*
-    const char* who = x.port == 0 ? "PC" : "Player";
-    printLog("Entro %s Pasaron %f s\n", who, e);
-    printLog("Sigma %f\n", sigma);
-    printLog("PC %f %f %d \n", PcBoxes.front().second, PcBoxes.back().second, PcBoxes.size());
-    printLog("Player %f %f %d \n", PlayerBoxes.front().second, PlayerBoxes.back().second, PlayerBoxes.size());
-    printLog("\n");
-  */    
 }
 
 Event conveyerbelt::lambda(double t) {
+  // Obtain the first box of each side, with their distance updated
   PcDistance = updatedDistance(PcBoxes.front().second, sigma, velocity);
   PlayerDistance = updatedDistance(PlayerBoxes.front().second, sigma, velocity);
   pair<double,double> PcBox (PcBoxes.front().first, PcDistance);
   pair<double,double> PlayerBox (PlayerBoxes.front().first, PlayerDistance);
 
-  if (PlayerBoxes.empty()) {
-    // printLog("LlegoPc\n");
+  if (PlayerBoxes.empty()) { // PC arrival
     out = make_tuple(PC_ARRIVAL, PcBox.first, length);
     return Event(&out, ARRIVALS_PORT);
-  } else if (PcBoxes.empty()) {
-    // printLog("LlegoPlayer\n");
+
+  } else if (PcBoxes.empty()) { // Player arrival
     out = make_tuple(PLAYER_ARRIVAL, PlayerBox.first, length);
     return Event(&out, ARRIVALS_PORT);
-  } else {
+
+  } else { // Collisions
     double PcCollisionPower = collisionPower(PcBox);
     double PlayerCollisionPower = collisionPower(PlayerBox);
 
-    if (isEqual(PlayerCollisionPower, PcCollisionPower)) {
-      // printLog("ColisionEmpate\n");
+    if (isEqual(PlayerCollisionPower, PcCollisionPower)) { // Collision Draw
       out = make_tuple(COLLISION_DRAW, 0, PlayerDistance);
       return Event(&out, COLLISIONS_PORT);
-    } else if (PlayerCollisionPower < PcCollisionPower) {
-      // printLog("ColisionGanoPc\n");
+
+    } else if (PlayerCollisionPower < PcCollisionPower) { // Collision PC wins
       out = make_tuple(COLLISION_PC_WINS, updatedWeight(PcBox, PlayerBox), PcDistance);
       return Event(&out, COLLISIONS_PORT);
-    } else if (PlayerCollisionPower > PcCollisionPower) {
-      // printLog("ColisionGanoPlayer\n");
+
+    } else if (PlayerCollisionPower > PcCollisionPower) { // Collision Player wins
       out = make_tuple(COLLISION_PLAYER_WINS, updatedWeight(PlayerBox, PcBox), PlayerDistance);
       return Event(&out, COLLISIONS_PORT);
+
     }
   }
 

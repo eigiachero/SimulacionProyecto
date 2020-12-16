@@ -47,7 +47,7 @@ Coupled
             Description = Human player
             Graphic
                 {
-                Position = -15975 ; -3645
+                Position = -15900 ; -3570
                 Dimension = 765 ; 705
                 Direction = Right
                 Color = 15
@@ -56,7 +56,7 @@ Coupled
             Parameters
                 {
                 name = Str; Human ; Nombre del jugador
-                strategy = Val; 3 ; Estrategia a utilizar\n0 - Estrategia de PC\n1..4 - Estrategias de jugador explicadas en el proyecto
+                strategy = Val; 4 ; Estrategia a utilizar\n0 - Estrategia de PC\n1..4 - Estrategias de jugador explicadas en el proyecto
                 quantity = Val; 100 ; Cantidad de elementos (pesos e interrarribos) a generar
                 }
             }
@@ -159,8 +159,8 @@ Coupled
             {
             Source = Cmp ;  2 ;  1 ; 0
             Sink = Cmp ;  3 ;  2 ; -1
-            PointX = -15075 ; -13440 ; -13440
-            PointY = -3300 ; -3300 ; -4350
+            PointX = -15000 ; -13440 ; -13440
+            PointY = -3225 ; -3225 ; -4350
             }
         Line
             {
@@ -215,15 +215,15 @@ Coupled
             {
             Source = Cmp ;  3 ;  1 ; 0
             Sink = Cmp ;  2 ;  1 ; -1
-            PointX = -12075 ; -11925 ; -11925 ; -16350 ; -16350 ; -16140
-            PointY = -4650 ; -4650 ; -2100 ; -2100 ; -3450 ; -3450
+            PointX = -12075 ; -11925 ; -11925 ; -16350 ; -16350 ; -16065
+            PointY = -4650 ; -4650 ; -2100 ; -2100 ; -3375 ; -3375
             }
         Line
             {
             Source = Cmp ;  3 ;  2 ; 0
             Sink = Cmp ;  2 ;  2 ; -1
-            PointX = -12075 ; -12075 ; -16140 ; -16140
-            PointY = -4350 ; -2250 ; -2250 ; -3150
+            PointX = -12075 ; -12075 ; -16200 ; -16200 ; -16065
+            PointY = -4350 ; -2250 ; -2250 ; -3075 ; -3075
             }
         Extra
             {

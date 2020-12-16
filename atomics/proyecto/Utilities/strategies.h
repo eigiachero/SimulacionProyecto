@@ -2,7 +2,7 @@
 
 using namespace std;
 
-// Constantes
+// Constants
 #define strategyPCWeightMin 5
 #define strategyPCWeightMax 8
 #define strategyPCInterrarrivals 6
@@ -10,7 +10,7 @@ using namespace std;
 #define strategyHumanWeight 7.5
 #define strategyHumanInterrarrival 10
 
-//Funciones
+// Functions
 list<double> getStrategyWeights(int strategy, int quantity);
 
 list<double> getStrategyInterarrivals(int strategy, int quantity);

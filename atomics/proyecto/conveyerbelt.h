@@ -16,14 +16,17 @@
 using namespace std;
 
 class conveyerbelt: public Simulator {
+	// Parameters
 	double length;
 	double velocity;
+	// State
 	list<pair<double,double>> PcBoxes;
 	list<pair<double,double>> PlayerBoxes;
 
 	double sigma;
-	double in;
+	double in; // Returns the weight of the box that will go to the belt
 
+	// Output variables
 	double PcDistance;
 	double PlayerDistance;
 	tuple<int, double, double> out; //(evento, peso_ganador, distancia_ganador)

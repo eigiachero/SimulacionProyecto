@@ -12,7 +12,7 @@ list<double> genExponentialDistribution(double mean, int quantity){
         double num = distExp(generator);
         exponentialNumbers.push_back(num);
     }
-    
+
     return exponentialNumbers;
 };
 
@@ -43,6 +43,6 @@ list<double> genInfiniteList(int quantity) {
 int getRandomInt(double min, double max) {
     generator.seed(rd());
     uniform_real_distribution<double> distUnif(min, max);
-   
+
     return (int) distUnif(generator);
 };

@@ -4,7 +4,7 @@ list<double> getStrategyWeights(int strategy, int quantity){
   list<double> weights;
   list<double> weightsPC = genUniformDistribution(strategyPCWeightMin, strategyPCWeightMax, quantity);
   list<double> weightsHuman = genExponentialDistribution(strategyHumanWeight, quantity);
-  
+
   switch (strategy) {
     case 0:
       weights = weightsPC;
@@ -28,7 +28,7 @@ list<double> getStrategyWeights(int strategy, int quantity){
       weights = strategyRandomWeightFirst(weights);
       break;
   }
-  
+
   return weights;
 }
 
@@ -52,10 +52,13 @@ list<double> getStrategyInterarrivals(int strategy, int quantity){
       interarrivals = genInfiniteList(quantity);
       break;
   }
-  
+
   return interarrivals;
 }
 
+// Takes a weights list (sorted from smallest to largest) and a certain winnerWeight,
+// and returns the same list but with the least greater weight that surpases winnerWeight
+// positioned at the front of the list.
 list<double> strategyReorderWeightList(list<double> weights, double winnerWeight) {
   list<double> reorderedWeights;
   bool found = false;
@@ -76,6 +79,8 @@ list<double> strategyReorderWeightList(list<double> weights, double winnerWeight
   return reorderedWeights;
 }
 
+// Takes a weights list and returns a list with the same content with
+// a random element taken from the list and attached to the front.
 list<double> strategyRandomWeightFirst(list<double> weights) {
   list<double> reorderedWeights;
   int randomPosition = getRandomInt(0, weights.size() - 1);
